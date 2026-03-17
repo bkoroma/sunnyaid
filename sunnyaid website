@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SunnyAid – NDIS Disability Services Australia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root {
+  --teal: #0d3347;
+  --teal-mid: #1a4d6b;
+  --teal-light: #2a6f94;
+  --gold: #d4952a;
+  --gold-bright: #f0b73a;
+  --cream: #f8f4ee;
+  --white: #ffffff;
+  --text: #0d1f2d;
+  --text-mid: #4a6070;
+  --text-light: #7a9aaa;
+  --border: rgba(13,51,71,0.1);
+  --shadow-sm: 0 2px 12px rgba(13,51,71,0.08);
+  --shadow: 0 8px 32px rgba(13,51,71,0.12);
+  --shadow-lg: 0 20px 60px rgba(13,51,71,0.18);
+  --nav-h: 80px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:#f0ead8;}
+::-webkit-scrollbar-thumb{background:var(--teal-light);border-radius:3px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 5%;box-shadow:var(--shadow-sm);transition:.3s;}
+nav.scrolled{background:rgba(13,51,71,0.97);}
+nav.scrolled .nav-links a{color:rgba(255,255,255,0.8);}
+nav.scrolled .nav-links a:hover,nav.scrolled .nav-links a.active{color:var(--gold-bright);}
+nav.scrolled .nav-logo{color:var(--white);}
+nav.scrolled .nav-time{color:var(--gold-bright);}
+nav.scrolled .nav-date{color:rgba(255,255,255,0.55);}
+nav.scrolled .hamburger span{background:var(--white);}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--teal),var(--teal-mid));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--teal);font-weight:700;}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:28px;list-style:none;margin:0 auto;}
+.nav-links a{text-decoration:none;color:var(--text-mid);font-weight:500;font-size:.9rem;transition:.2s;position:relative;padding-bottom:3px;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);border-radius:1px;transform:scaleX(0);transition:.25s;}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-links a:hover,.nav-links a.active{color:var(--teal);}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-datetime{text-align:right;line-height:1.35;}
+.nav-time{font-size:.95rem;font-weight:700;color:var(--teal);font-family:'Playfair Display',serif;display:block;}
+.nav-date{font-size:.7rem;color:var(--text-light);font-weight:500;display:block;}
+.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gold-bright));color:var(--teal);padding:10px 22px;border-radius:50px;font-weight:700;font-size:.85rem;text-decoration:none;display:flex;align-items:center;gap:8px;transition:.25s;white-space:nowrap;box-shadow:0 4px 16px rgba(212,149,42,0.35);}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,149,42,0.45);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;border:none;background:none;padding:4px;}
+.hamburger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:.3s;}
+
+/* HERO */
+#hero{min-height:100vh;background:linear-gradient(160deg,var(--teal) 0%,var(--teal-mid) 45%,#1e5c7a 100%);display:flex;align-items:center;padding:calc(var(--nav-h)+60px) 5% 80px;position:relative;overflow:hidden;}
+.hero-geo{position:absolute;inset:0;pointer-events:none;}
+.hero-geo::before{content:'';position:absolute;top:-200px;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(212,149,42,0.12),transparent 65%);border-radius:50%;}
+.hero-geo::after{content:'';position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.04),transparent 70%);border-radius:50%;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:60px 60px;}
+.hero-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1;}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(212,149,42,0.15);border:1px solid rgba(212,149,42,0.3);color:var(--gold-bright);font-size:.75rem;font-weight:700;letter-spacing:.12em;padding:7px 16px;border-radius:50px;margin-bottom:28px;text-transform:uppercase;}
+.hero-dot{width:6px;height:6px;background:var(--gold-bright);border-radius:50%;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+h1.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4.5vw,3.8rem);line-height:1.12;color:var(--white);margin-bottom:24px;font-weight:900;}
+h1.hero-title em{color:var(--gold-bright);font-style:italic;}
+.hero-desc{font-size:1.05rem;color:rgba(255,255,255,0.72);line-height:1.8;margin-bottom:40px;max-width:480px;}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:56px;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-bright));color:var(--teal);padding:14px 30px;border-radius:50px;font-weight:700;font-size:.93rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:.25s;box-shadow:0 6px 20px rgba(212,149,42,0.4);}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(212,149,42,0.5);}
+.btn-ghost{background:rgba(255,255,255,0.1);color:var(--white);border:1.5px solid rgba(255,255,255,0.25);padding:14px 30px;border-radius:50px;font-weight:600;font-size:.93rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:.25s;backdrop-filter:blur(8px);}
+.btn-ghost:hover{background:rgba(255,255,255,0.18);transform:translateY(-3px);}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.1);border-radius:16px;overflow:hidden;}
+.hero-stat{background:rgba(255,255,255,0.06);padding:20px;text-align:center;}
+.hero-stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--gold-bright);font-weight:700;line-height:1;}
+.hero-stat-label{font-size:.75rem;color:rgba(255,255,255,0.6);margin-top:4px;font-weight:500;}
+.hero-visual{position:relative;}
+.hero-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.hcard{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:18px;padding:24px;backdrop-filter:blur(12px);transition:.3s;}
+.hcard:hover{background:rgba(255,255,255,0.12);transform:translateY(-4px);}
+.hcard-icon{width:48px;height:48px;background:linear-gradient(135deg,var(--gold),var(--gold-bright));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px;}
+.hcard h4{color:var(--white);font-weight:600;font-size:.93rem;margin-bottom:6px;}
+.hcard p{color:rgba(255,255,255,0.6);font-size:.8rem;line-height:1.55;}
+.hcard.wide{grid-column:1/-1;display:flex;gap:20px;align-items:center;}
+.hcard.wide .hcard-icon{flex-shrink:0;width:56px;height:56px;font-size:1.5rem;}
+.hero-float{position:absolute;bottom:-20px;right:-20px;background:var(--white);border-radius:14px;padding:14px 20px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:12px;}
+.hf-icon{width:40px;height:40px;background:linear-gradient(135deg,#2ecc71,#27ae60);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.hf-text strong{display:block;font-size:.88rem;color:var(--teal);}
+.hf-text span{font-size:.75rem;color:var(--text-mid);}
+
+/* TRUST BAR */
+.trust-bar{background:var(--gold);padding:18px 5%;}
+.trust-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.trust-text{font-weight:700;color:var(--teal);font-size:.9rem;}
+.trust-items{display:flex;gap:32px;align-items:center;flex-wrap:wrap;}
+.trust-item{font-weight:600;font-size:.85rem;color:var(--teal);}
+
+/* SHARED */
+section{padding:100px 5%;}
+.si{max-width:1200px;margin:0 auto;}
+.eyebrow{display:block;text-align:center;font-size:.72rem;font-weight:800;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,2.9rem);text-align:center;color:var(--teal);margin-bottom:18px;line-height:1.2;}
+.sec-title em{color:var(--gold);font-style:italic;}
+.sec-desc{text-align:center;color:var(--text-mid);max-width:520px;margin:0 auto 64px;line-height:1.8;font-size:.97rem;}
+
+/* ABOUT */
+#about{background:linear-gradient(160deg,var(--teal),var(--teal-mid));padding:100px 5%;position:relative;overflow:hidden;}
+#about::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(212,149,42,0.08),transparent 65%);border-radius:50%;}
+.about-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1;}
+.about-ey{font-size:.72rem;font-weight:800;letter-spacing:.2em;color:var(--gold-bright);text-transform:uppercase;display:block;margin-bottom:14px;}
+.about-inner h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--white);margin-bottom:20px;line-height:1.2;}
+.about-inner>div>p{color:rgba(255,255,255,0.72);line-height:1.8;margin-bottom:32px;}
+.about-stats{display:flex;gap:40px;margin-bottom:36px;}
+.ast{border-left:3px solid var(--gold);padding-left:18px;}
+.ast-num{font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--gold-bright);line-height:1;}
+.ast-lbl{color:rgba(255,255,255,0.6);font-size:.8rem;margin-top:4px;}
+.about-cards{display:flex;flex-direction:column;gap:16px;}
+.acard{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:22px 24px;display:flex;gap:18px;align-items:flex-start;transition:.3s;}
+.acard:hover{background:rgba(255,255,255,0.12);transform:translateX(4px);}
+.acard-icon{width:46px;height:46px;background:linear-gradient(135deg,var(--gold),var(--gold-bright));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.acard h4{color:var(--white);font-weight:700;font-size:.97rem;margin-bottom:5px;}
+.acard p{color:rgba(255,255,255,0.62);font-size:.85rem;line-height:1.6;}
+
+/* SERVICES */
+#services{background:var(--cream);}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.scard{background:var(--white);border-radius:20px;padding:30px;border:1px solid var(--border);transition:.35s;cursor:pointer;position:relative;overflow:hidden;}
+.scard::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--teal),var(--teal-mid));opacity:0;transition:.35s;z-index:0;}
+.scard:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+.scard:hover::after{opacity:1;}
+.scard>*{position:relative;z-index:1;}
+.scard:hover .sc-icon{background:var(--gold);}
+.scard:hover .sc-title,.scard:hover .sc-desc,.scard:hover .sc-more{color:var(--white)!important;}
+.sc-icon{width:52px;height:52px;background:rgba(13,51,71,0.08);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:20px;transition:.3s;}
+.sc-title{font-weight:700;font-size:1rem;color:var(--teal);margin-bottom:12px;transition:.3s;}
+.sc-desc{font-size:.87rem;color:var(--text-mid);line-height:1.7;margin-bottom:20px;transition:.3s;}
+.sc-more{font-size:.82rem;font-weight:700;color:var(--gold);transition:.3s;}
+.scard.feat{background:linear-gradient(135deg,var(--teal),var(--teal-mid));border-color:transparent;}
+.scard.feat::after{display:none;}
+.scard.feat .sc-title,.scard.feat .sc-more{color:var(--white);}
+.scard.feat .sc-desc{color:rgba(255,255,255,0.7);}
+.scard.feat .sc-icon{background:var(--gold);}
+
+/* HOW IT WORKS */
+#how{background:var(--white);}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;position:relative;}
+.steps::before{content:'';position:absolute;top:55px;left:calc(16.5% + 20px);right:calc(16.5% + 20px);height:2px;background:linear-gradient(90deg,var(--gold),var(--teal));z-index:0;}
+.step{text-align:center;position:relative;z-index:1;}
+.step-ring{width:110px;height:110px;border-radius:50%;border:3px solid var(--gold);margin:0 auto 24px;display:flex;align-items:center;justify-content:center;font-size:2.8rem;position:relative;background:var(--cream);transition:.3s;}
+.step-ring:hover{background:var(--gold);transform:scale(1.05);}
+.step-badge{position:absolute;bottom:-10px;right:-10px;width:32px;height:32px;background:var(--teal);color:var(--gold-bright);border-radius:50%;font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center;border:2px solid var(--white);}
+.step h3{font-weight:700;color:var(--teal);margin-bottom:10px;}
+.step p{font-size:.87rem;color:var(--text-mid);line-height:1.7;}
+
+/* PLAN */
+#plan{background:var(--cream);}
+.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.pcard{background:linear-gradient(160deg,var(--teal),var(--teal-mid));border-radius:22px;padding:40px;}
+.pcard.light{background:var(--white);border:1px solid var(--border);}
+.pcard h3{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--white);margin-bottom:14px;}
+.pcard.light h3{color:var(--teal);}
+.pcard>p{font-size:.92rem;line-height:1.75;color:rgba(255,255,255,0.72);margin-bottom:28px;}
+.pcard.light>p{color:var(--text-mid);}
+.p-lbl{font-size:.78rem;font-weight:800;letter-spacing:.1em;color:var(--gold-bright);margin-bottom:16px;text-transform:uppercase;}
+.pcard.light .p-lbl{color:var(--gold);}
+.pcard ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px;}
+.pcard ul li{display:flex;align-items:center;gap:12px;font-size:.9rem;color:rgba(255,255,255,0.82);}
+.pcard.light ul li{color:var(--text-mid);}
+.pcard ul li::before{content:'✓';width:22px;height:22px;background:var(--gold);color:var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0;}
+
+/* TESTIMONIALS */
+#testimonials{background:var(--white);}
+.testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+.tcard{background:var(--cream);border-radius:20px;padding:32px;border:1px solid var(--border);transition:.25s;}
+.tcard:hover{box-shadow:var(--shadow);transform:translateY(-4px);}
+.tcard-head{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+.tcard-av{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;flex-shrink:0;}
+.tcard-name{font-weight:700;color:var(--teal);font-size:.97rem;}
+.tcard-role{font-size:.78rem;color:var(--text-light);margin-bottom:5px;}
+.stars{color:var(--gold);letter-spacing:2px;font-size:.85rem;}
+.tcard-q{font-size:.9rem;line-height:1.78;color:var(--text-mid);font-style:italic;position:relative;padding-top:16px;}
+.tcard-q::before{content:'\201C';font-family:'Playfair Display',serif;font-size:3.5rem;color:var(--gold);line-height:0;position:absolute;top:20px;left:0;}
+.tcard-qi{padding-left:28px;}
+
+/* EVENTS */
+#events{background:var(--cream);}
+.events-list{display:flex;flex-direction:column;gap:20px;}
+.erow{background:var(--white);border-radius:18px;border:1px solid var(--border);display:grid;grid-template-columns:130px 1fr auto;overflow:hidden;transition:.25s;}
+.erow:hover{box-shadow:var(--shadow);transform:translateY(-3px);}
+.ethumb{display:flex;align-items:center;justify-content:center;font-size:2.8rem;}
+.ebody{padding:22px 28px;}
+.eloc{font-size:.78rem;color:var(--text-light);margin-bottom:6px;}
+.etitle{font-weight:700;color:var(--teal);font-size:1rem;margin-bottom:10px;}
+.ehost{display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--text-mid);margin-bottom:14px;}
+.eav{width:30px;height:30px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:var(--teal);flex-shrink:0;}
+.ebox{background:var(--teal);padding:20px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px;}
+.ebox-mo{font-size:.72rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,0.65);margin-bottom:4px;}
+.ebox-d{font-family:'Playfair Display',serif;font-size:2.8rem;color:var(--gold-bright);line-height:1;}
+.ebox-t{font-size:.7rem;color:rgba(255,255,255,0.5);margin-top:6px;}
+
+/* AWARDS */
+#awards{background:linear-gradient(160deg,var(--teal-mid),var(--teal));padding:100px 5%;}
+.aw-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.aw-ey{font-size:.72rem;font-weight:800;letter-spacing:.2em;color:var(--gold-bright);text-transform:uppercase;display:block;margin-bottom:14px;}
+.aw-inner h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--white);margin-bottom:18px;line-height:1.25;}
+.aw-inner p{color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:32px;}
+.aw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.aw-b{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:20px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:.3s;}
+.aw-b:hover{background:rgba(212,149,42,0.15);border-color:rgba(212,149,42,0.3);transform:translateY(-3px);}
+.aw-b-icon{font-size:2rem;}
+.aw-b-lbl{font-size:.72rem;color:rgba(255,255,255,0.65);text-align:center;font-weight:600;line-height:1.4;}
+
+/* ARTICLES */
+#articles{background:var(--white);}
+.art-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.art-card{border-radius:20px;overflow:hidden;border:1px solid var(--border);transition:.3s;}
+.art-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-5px);}
+.art-thumb{height:190px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;}
+.art-body{padding:24px;}
+.art-tag{font-size:.7rem;font-weight:800;letter-spacing:.12em;color:var(--gold);margin-bottom:10px;text-transform:uppercase;}
+.art-title{font-weight:700;color:var(--teal);margin-bottom:14px;font-size:.95rem;line-height:1.5;}
+.art-link{font-size:.83rem;font-weight:600;color:var(--text-mid);display:flex;align-items:center;gap:6px;text-decoration:none;transition:.2s;}
+.art-link:hover{color:var(--teal);}
+
+/* QR SECTION */
+#qr-section{background:var(--cream);padding:100px 5%;}
+.qr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.qr-card{background:var(--white);border-radius:24px;padding:36px 28px;border:1px solid var(--border);text-align:center;transition:.3s;position:relative;overflow:hidden;cursor:pointer;}
+.qr-card::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,var(--teal),var(--teal-mid));opacity:0;transition:.4s;z-index:0;}
+.qr-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+.qr-card:hover::before{opacity:1;}
+.qr-card:hover .qr-lbl,.qr-card:hover .qr-val,.qr-card:hover .qr-hint{color:var(--white)!important;}
+.qr-card:hover .qr-icon-w{background:var(--gold);}
+.qr-card:hover .qr-box{border-color:var(--gold-bright);box-shadow:0 0 0 4px rgba(240,183,58,0.25);}
+.qr-card:hover .qr-tag{background:rgba(255,255,255,0.18);color:var(--white);}
+.qr-card>*{position:relative;z-index:1;}
+.qr-icon-w{width:52px;height:52px;background:rgba(13,51,71,0.08);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto 20px;transition:.3s;}
+.qr-lbl{font-size:.72rem;font-weight:800;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;margin-bottom:6px;transition:.3s;}
+.qr-val{font-weight:700;color:var(--teal);font-size:.93rem;margin-bottom:18px;transition:.3s;}
+.qr-box{width:150px;height:150px;margin:0 auto 18px;background:var(--white);border-radius:14px;display:flex;align-items:center;justify-content:center;padding:10px;box-shadow:var(--shadow-sm);border:2px solid var(--border);transition:.3s;}
+.qr-box canvas,.qr-box img{width:130px!important;height:130px!important;border-radius:6px;}
+.qr-hint{font-size:.78rem;color:var(--text-light);line-height:1.55;transition:.3s;}
+.qr-tag{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--teal);font-size:.7rem;font-weight:800;padding:5px 12px;border-radius:50px;margin-top:12px;letter-spacing:.06em;transition:.3s;}
+
+/* QR MODAL */
+.qr-overlay{position:fixed;inset:0;background:rgba(13,51,71,0.72);z-index:3000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.3s;backdrop-filter:blur(8px);}
+.qr-overlay.open{opacity:1;pointer-events:all;}
+.qr-modal{background:var(--white);border-radius:28px;padding:44px 36px;text-align:center;max-width:360px;width:90%;transform:scale(.88);transition:.35s cubic-bezier(.34,1.56,.64,1);box-shadow:var(--shadow-lg);}
+.qr-overlay.open .qr-modal{transform:scale(1);}
+.qr-m-icon{width:60px;height:60px;background:linear-gradient(135deg,var(--teal),var(--teal-mid));border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 16px;}
+.qr-modal h3{font-family:'Playfair Display',serif;color:var(--teal);font-size:1.5rem;margin-bottom:6px;}
+.qr-m-sub{color:var(--text-mid);font-size:.88rem;margin-bottom:24px;}
+.qr-m-box{width:210px;height:210px;margin:0 auto 20px;background:var(--white);border-radius:18px;display:flex;align-items:center;justify-content:center;padding:14px;border:2px solid var(--border);}
+.qr-m-box canvas,.qr-m-box img{width:182px!important;height:182px!important;border-radius:8px;}
+.qr-m-val{font-weight:700;color:var(--teal);font-size:.9rem;margin-bottom:20px;}
+.qr-m-close{background:linear-gradient(135deg,var(--teal),var(--teal-mid));color:var(--white);border:none;padding:13px 32px;border-radius:50px;font-weight:700;font-size:.88rem;cursor:pointer;transition:.2s;}
+.qr-m-close:hover{opacity:.88;}
+
+/* CTA */
+#cta{background:linear-gradient(160deg,var(--teal),var(--teal-mid));padding:100px 5%;position:relative;overflow:hidden;}
+#cta::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(212,149,42,0.1),transparent 60%);border-radius:50%;}
+.cta-inner{max-width:800px;margin:0 auto;text-align:center;position:relative;z-index:1;}
+.cta-ey{font-size:.72rem;font-weight:800;letter-spacing:.2em;color:var(--gold-bright);text-transform:uppercase;display:block;margin-bottom:16px;}
+.cta-inner h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);color:var(--white);margin-bottom:18px;line-height:1.2;}
+.cta-inner p{color:rgba(255,255,255,0.72);margin-bottom:40px;font-size:1.02rem;line-height:1.75;}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+footer{background:#091e2e;padding:80px 5% 32px;}
+.ft-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.6fr;gap:60px;margin-bottom:56px;}
+.ft-logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--white);margin-bottom:16px;display:block;}
+.ft-logo span{color:var(--gold);}
+.ft-desc{color:rgba(255,255,255,0.5);font-size:.87rem;line-height:1.8;margin-bottom:24px;}
+.ft-contacts{display:flex;flex-direction:column;gap:10px;}
+.ft-contacts a{color:rgba(255,255,255,0.6);font-size:.87rem;text-decoration:none;display:flex;align-items:center;gap:10px;transition:.2s;}
+.ft-contacts a:hover{color:var(--gold-bright);}
+.ft-col h4{color:var(--white);font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.ft-col ul li a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:.87rem;transition:.2s;}
+.ft-col ul li a:hover{color:var(--gold-bright);}
+.ft-sub p{color:rgba(255,255,255,0.5);font-size:.83rem;margin-bottom:14px;line-height:1.65;}
+.sub-row{display:flex;gap:8px;}
+.sub-row input{flex:1;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:50px;padding:11px 18px;color:var(--white);font-size:.85rem;outline:none;font-family:'Outfit',sans-serif;}
+.sub-row input::placeholder{color:rgba(255,255,255,0.35);}
+.sub-row input:focus{border-color:var(--gold);}
+.sub-row button{background:linear-gradient(135deg,var(--gold),var(--gold-bright));border:none;color:var(--teal);padding:11px 20px;border-radius:50px;font-weight:700;font-size:.82rem;cursor:pointer;transition:.2s;white-space:nowrap;}
+.sub-row button:hover{transform:translateY(-1px);}
+.ft-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.08);padding-top:28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.ft-copy{color:rgba(255,255,255,0.35);font-size:.82rem;}
+.ft-links{display:flex;gap:24px;}
+.ft-links a{color:rgba(255,255,255,0.35);font-size:.82rem;text-decoration:none;transition:.2s;}
+.ft-links a:hover{color:var(--gold);}
+
+/* CHAT FAB */
+.chat-fab{position:fixed;bottom:32px;right:32px;z-index:2000;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-mid));border:none;color:var(--white);font-size:1.5rem;cursor:pointer;box-shadow:0 8px 28px rgba(13,51,71,0.4);transition:.3s;display:flex;align-items:center;justify-content:center;}
+.chat-fab:hover{transform:scale(1.1);box-shadow:0 12px 36px rgba(13,51,71,0.55);}
+.notif{position:absolute;top:-4px;right:-4px;width:20px;height:20px;background:var(--gold);border-radius:50%;font-size:.65rem;font-weight:800;color:var(--teal);display:flex;align-items:center;justify-content:center;border:2px solid var(--white);}
+
+/* CHAT WINDOW */
+.chat-win{position:fixed;bottom:112px;right:32px;z-index:2000;width:390px;max-height:580px;background:var(--white);border-radius:24px;box-shadow:0 24px 80px rgba(13,51,71,0.25);display:flex;flex-direction:column;overflow:hidden;transform:scale(0.85) translateY(20px);transform-origin:bottom right;opacity:0;pointer-events:none;transition:.35s cubic-bezier(.34,1.56,.64,1);}
+.chat-win.open{opacity:1;pointer-events:all;transform:scale(1) translateY(0);}
+.ch-header{background:linear-gradient(135deg,var(--teal),var(--teal-mid));padding:20px 22px;display:flex;align-items:center;gap:14px;}
+.ch-av{width:44px;height:44px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.ch-info h4{color:var(--white);font-weight:700;font-size:.97rem;}
+.ch-info p{color:rgba(255,255,255,0.65);font-size:.75rem;display:flex;align-items:center;gap:6px;}
+.sdot{width:8px;height:8px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.7;transform:scale(.85);}}
+.ch-close{margin-left:auto;background:rgba(255,255,255,0.15);border:none;color:var(--white);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.2s;}
+.ch-close:hover{background:rgba(255,255,255,0.25);}
+.ch-dt{background:var(--cream);padding:10px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+.ch-dt-time{font-size:.8rem;font-weight:700;color:var(--teal);font-family:'Playfair Display',serif;}
+.ch-dt-date{font-size:.7rem;color:var(--text-light);}
+.ch-msgs{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;min-height:0;}
+.ch-msgs::-webkit-scrollbar{width:3px;}
+.ch-msgs::-webkit-scrollbar-thumb{background:var(--border);}
+.msg{max-width:82%;display:flex;flex-direction:column;gap:4px;}
+.msg.bot{align-self:flex-start;}
+.msg.user{align-self:flex-end;}
+.msg-b{padding:12px 16px;border-radius:18px;font-size:.875rem;line-height:1.6;}
+.msg.bot .msg-b{background:var(--cream);color:var(--text);border-bottom-left-radius:4px;border:1px solid var(--border);}
+.msg.user .msg-b{background:linear-gradient(135deg,var(--teal),var(--teal-mid));color:var(--white);border-bottom-right-radius:4px;}
+.msg-t{font-size:.68rem;color:var(--text-light);}
+.msg.user .msg-t{text-align:right;}
+.typing{display:flex;gap:5px;align-items:center;padding:14px 16px;}
+.typing span{width:7px;height:7px;background:var(--text-light);border-radius:50%;animation:bounce 1s infinite;}
+.typing span:nth-child(2){animation-delay:.15s;}
+.typing span:nth-child(3){animation-delay:.3s;}
+@keyframes bounce{0%,60%,100%{transform:translateY(0);}30%{transform:translateY(-7px);}}
+.ch-qr{padding:12px 16px;display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--border);}
+.qbtn{background:var(--cream);border:1px solid var(--border);color:var(--teal);padding:7px 14px;border-radius:50px;font-size:.78rem;font-weight:600;cursor:pointer;transition:.2s;}
+.qbtn:hover{background:var(--teal);color:var(--white);border-color:var(--teal);}
+.ch-input-row{padding:16px;border-top:1px solid var(--border);display:flex;gap:10px;}
+.ch-in{flex:1;border:1.5px solid var(--border);border-radius:50px;padding:11px 18px;font-size:.875rem;outline:none;font-family:'Outfit',sans-serif;transition:.2s;background:var(--cream);}
+.ch-in:focus{border-color:var(--teal);background:var(--white);}
+.ch-send{background:linear-gradient(135deg,var(--teal),var(--teal-mid));border:none;color:var(--white);width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0;}
+.ch-send:hover{opacity:.85;}
+
+/* MOB MENU */
+.mob-menu{position:fixed;inset:0;background:var(--white);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;transform:translateX(100%);transition:.35s cubic-bezier(.77,0,.18,1);}
+.mob-menu.open{transform:translateX(0);}
+.mob-menu a{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--teal);text-decoration:none;transition:.2s;}
+.mob-menu a:hover{color:var(--gold);}
+.mob-close{position:absolute;top:24px;right:24px;background:none;border:none;font-size:1.8rem;cursor:pointer;color:var(--text);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(32px);transition:.65s cubic-bezier(.22,.68,0,1.2);}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero-inner,.about-inner,.aw-inner{grid-template-columns:1fr;}
+  .svc-grid{grid-template-columns:repeat(2,1fr);}
+  .qr-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  nav .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .nav-datetime{display:none;}
+  .plan-grid,.testi-grid{grid-template-columns:1fr;}
+  .art-grid{grid-template-columns:1fr 1fr;}
+  .ft-grid{grid-template-columns:1fr 1fr;}
+  .steps{grid-template-columns:1fr;}
+  .steps::before{display:none;}
+  .erow{grid-template-columns:100px 1fr auto;}
+  .chat-win{width:calc(100vw - 32px);right:16px;}
+  .chat-fab{right:16px;bottom:16px;}
+}
+@media(max-width:580px){
+  .svc-grid,.art-grid,.ft-grid,.qr-grid{grid-template-columns:1fr;}
+  .erow{grid-template-columns:1fr;}
+  .ethumb{display:none;}
+  .hero-cards{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="closeMob()">✕</button>
+  <a href="#hero" onclick="closeMob()">Home</a>
+  <a href="#about" onclick="closeMob()">About</a>
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#events" onclick="closeMob()">Events</a>
+  <a href="#articles" onclick="closeMob()">Blog</a>
+  <a href="#qr-section" onclick="closeMob()">QR Codes</a>
+  <a href="#cta" onclick="closeMob()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-brand">
+    <div class="nav-icon">☀️</div>
+    <div class="nav-logo">Sunny<span>Aid</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#articles">Blog</a></li>
+    <li><a href="#qr-section">QR Codes</a></li>
+    <li><a href="#cta">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-datetime">
+      <span class="nav-time" id="navTime">--:-- --</span>
+      <span class="nav-date" id="navDate">Loading...</span>
+    </div>
+    <a href="tel:+61889675083" class="nav-cta">📞 +61-8-8967-5083</a>
+    <button class="hamburger" onclick="openMob()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-geo"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-pill"><span class="hero-dot"></span>Australia's Trusted NDIS Provider</div>
+      <h1 class="hero-title">We're Here For Your Whole NDIS <em>Disability</em> Journey</h1>
+      <p class="hero-desc">Personalised care and support delivered by 220+ expert team members across Queensland, NSW, Victoria, and Western Australia.</p>
+      <div class="hero-btns">
+        <a href="#cta" class="btn-gold">Book Appointment →</a>
+        <a href="#about" class="btn-ghost">About Us →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-num">220+</div><div class="hero-stat-label">Expert Team Members</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">98%</div><div class="hero-stat-label">Client Satisfaction</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">26yrs</div><div class="hero-stat-label">Trusted Experience</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-cards">
+        <div class="hcard">
+          <div class="hcard-icon">🏠</div>
+          <h4>Home Care Support</h4>
+          <p>Professional workers helping you live independently at home.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-icon">🌱</div>
+          <h4>Personal Growth</h4>
+          <p>Tailored plans focused on skill development and goals.</p>
+        </div>
+        <div class="hcard wide">
+          <div class="hcard-icon">🎯</div>
+          <div><h4>Support Coordination</h4><p>Expert coordinators helping you navigate and maximise your NDIS plan effectively across all four states.</p></div>
+        </div>
+      </div>
+      <div class="hero-float">
+        <div class="hf-icon">✅</div>
+        <div class="hf-text"><strong>NDIS Registered Provider</strong><span>#4050072735</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <p class="trust-text">Trusted by <strong>500+ Teams</strong> · Empowering <strong>200,000+ People</strong></p>
+    <div class="trust-items">
+      <span class="trust-item">⭐ GoodFirms 4.6</span>
+      <span class="trust-item">⭐ Clutch 4.8</span>
+      <span class="trust-item">🗺️ QLD · NSW · VIC · WA</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about">
+  <div class="about-inner">
+    <div>
+      <span class="about-ey">About SunnyAid</span>
+      <h2>NDIS Disability Service Provider For 26 Years</h2>
+      <p>For 26 years, we've been a trusted NDIS Disability Service Provider, delivering personalised care and support to empower individuals across Queensland, NSW, Victoria, and Western Australia.</p>
+      <div class="about-stats">
+        <div class="ast"><div class="ast-num">26+</div><div class="ast-lbl">Years Experience</div></div>
+        <div class="ast"><div class="ast-num">4</div><div class="ast-lbl">States Covered</div></div>
+        <div class="ast"><div class="ast-num">200k+</div><div class="ast-lbl">People Helped</div></div>
+      </div>
+      <a href="#cta" class="btn-gold">Get Started →</a>
+    </div>
+    <div class="about-cards">
+      <div class="acard reveal"><div class="acard-icon">🏠</div><div><h4>We're Home Care</h4><p>Professional support workers helping you live independently at home with dignity and comfort.</p></div></div>
+      <div class="acard reveal"><div class="acard-icon">🌱</div><div><h4>Personal Care &amp; Growth</h4><p>Tailored plans focused on your personal growth, skill development, and community participation.</p></div></div>
+      <div class="acard reveal"><div class="acard-icon">🎯</div><div><h4>Support Coordinators</h4><p>Expert coordinators helping you navigate and maximise your NDIS plan effectively.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="si">
+    <span class="eyebrow">What We Offer</span>
+    <h2 class="sec-title">Our Main <em>Services</em></h2>
+    <p class="sec-desc">Comprehensive NDIS disability services tailored to your individual needs and goals.</p>
+    <div class="svc-grid">
+      <div class="scard reveal"><div class="sc-icon">🧠</div><h3 class="sc-title">Therapeutic Support</h3><p class="sc-desc">Evidence-based therapy and wellbeing interventions designed around your unique care plan and goals.</p><span class="sc-more">Read More ↗</span></div>
+      <div class="scard feat reveal"><div class="sc-icon">🏡</div><h3 class="sc-title">Daily Living &amp; Life Skills</h3><p class="sc-desc">Support to navigate everyday tasks with confidence, independence and dignity in your own home.</p><span class="sc-more">Read More ↗</span></div>
+      <div class="scard reveal"><div class="sc-icon">🤝</div><h3 class="sc-title">Support &amp; Connection</h3><p class="sc-desc">Meaningful community engagement and social participation to build fulfilling relationships.</p><span class="sc-more">Read More ↗</span></div>
+      <div class="scard reveal"><div class="sc-icon">🛡️</div><h3 class="sc-title">Daily Life Assistance</h3><p class="sc-desc">Personal care and home tasks tailored to help you live comfortably and independently every day.</p><span class="sc-more">Read More ↗</span></div>
+      <div class="scard reveal"><div class="sc-icon">🗣️</div><h3 class="sc-title">NDIS Speech Therapy</h3><p class="sc-desc">Specialist communication support to improve language skills and overall quality of life.</p><span class="sc-more">Read More ↗</span></div>
+      <div class="scard reveal"><div class="sc-icon">🎉</div><h3 class="sc-title">Community &amp; Activities</h3><p class="sc-desc">Engaging social programs and group activities to enrich your life and connect you to the community.</p><span class="sc-more">Read More ↗</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="si">
+    <span class="eyebrow">Our Process</span>
+    <h2 class="sec-title">Get Started In Just <em>3 Steps</em></h2>
+    <p class="sec-desc">A simple, transparent process to begin your NDIS journey with SunnyAid.</p>
+    <div class="steps">
+      <div class="step reveal"><div class="step-ring">📞<div class="step-badge">01</div></div><h3>Make An Enquiry</h3><p>Reach out and we'll answer all your questions about our services, eligibility, and how we can help.</p></div>
+      <div class="step reveal"><div class="step-ring">📋<div class="step-badge">02</div></div><h3>Create A NDIS Plan</h3><p>We craft a personalised NDIS plan that addresses your specific needs, goals, and aspirations.</p></div>
+      <div class="step reveal"><div class="step-ring">✨<div class="step-badge">03</div></div><h3>Start Exceptional Care</h3><p>Begin your journey with us, where exceptional care and support helps you thrive every day.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN MANAGEMENT -->
+<section id="plan">
+  <div class="si">
+    <span class="eyebrow">How We Help</span>
+    <h2 class="sec-title">Getting Started With <em>A New Plan</em></h2>
+    <p class="sec-desc">Discover how SunnyAid helps you manage and maximise your NDIS funding.</p>
+    <div class="plan-grid">
+      <div class="pcard reveal">
+        <h3>NDIS Plan Management</h3>
+        <p>Managing your NDIS budget doesn't have to be complicated. You choose the providers, we handle the invoices.</p>
+        <div class="p-lbl">With SunnyAid, You Can:</div>
+        <ul>
+          <li>Track NDIS funds 24/7</li><li>Pay invoices fast and accurately</li>
+          <li>Reserve funding for preferred providers</li><li>Process your expenses easily</li>
+          <li>Take control of your NDIS budget</li><li>Access support and advice anytime</li>
+        </ul>
+        <a href="#cta" class="btn-gold">NDIS Plan Management →</a>
+      </div>
+      <div class="pcard light reveal">
+        <h3>NDIS Specialist Support</h3>
+        <p>Our expert Support Coordinators are here to make your NDIS journey easier and more effective.</p>
+        <div class="p-lbl">With SunnyAid, You Can:</div>
+        <ul>
+          <li>Better understand your NDIS plan</li><li>Connect with the right service providers</li>
+          <li>Get NDIS planning and review assistance</li><li>Build and maintain your independence</li>
+          <li>Reach your plan goals faster</li><li>Access expert advice when needed</li>
+        </ul>
+        <a href="#cta" class="btn-gold">NDIS Specialist Support →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="si">
+    <span class="eyebrow">Testimonials</span>
+    <h2 class="sec-title">Why Clients <em>Love Us</em></h2>
+    <p class="sec-desc">Hear what our clients and their families say about the SunnyAid difference.</p>
+    <div class="testi-grid">
+      <div class="tcard reveal"><div class="tcard-head"><div class="tcard-av" style="background:var(--teal);color:var(--white)">S</div><div><div class="tcard-role">Our Client</div><div class="tcard-name">Sophia Brown</div><div class="stars">★★★★★</div></div></div><div class="tcard-q"><div class="tcard-qi">I'm grateful to SunnyAid for their exceptional care and support. Their understanding and assistance empowered me to navigate the NDIS system confidently and independently.</div></div></div>
+      <div class="tcard reveal"><div class="tcard-head"><div class="tcard-av" style="background:var(--gold);color:var(--teal)">L</div><div><div class="tcard-role">Our Client</div><div class="tcard-name">Liam Johnson</div><div class="stars">★★★★★</div></div></div><div class="tcard-q"><div class="tcard-qi">SunnyAid provided exceptional support for my son's NDIS journey. Their dedication helped us navigate the system with ease. I'm grateful for their compassionate approach.</div></div></div>
+      <div class="tcard reveal"><div class="tcard-head"><div class="tcard-av" style="background:#4ade80;color:#0d3347">M</div><div><div class="tcard-role">Parent / Carer</div><div class="tcard-name">Maria Chen</div><div class="stars">★★★★★</div></div></div><div class="tcard-q"><div class="tcard-qi">The support coordinators at SunnyAid went above and beyond to ensure my daughter received the best care. We couldn't be more thankful for their professionalism and warmth.</div></div></div>
+      <div class="tcard reveal"><div class="tcard-head"><div class="tcard-av" style="background:#a78bfa;color:#fff">D</div><div><div class="tcard-role">NDIS Participant</div><div class="tcard-name">David Nguyen</div><div class="stars">★★★★★</div></div></div><div class="tcard-q"><div class="tcard-qi">From plan management to daily support, SunnyAid has transformed my life. The team is always responsive, caring, and genuinely invested in helping me reach my goals.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="si">
+    <span class="eyebrow">Featured Events</span>
+    <h2 class="sec-title">Join Our Upcoming <em>Events</em></h2>
+    <p class="sec-desc">Connect, learn, and grow with the SunnyAid community.</p>
+    <div class="events-list">
+      <div class="erow reveal">
+        <div class="ethumb" style="background:linear-gradient(135deg,var(--teal),var(--teal-mid))">🎤</div>
+        <div class="ebody"><div class="eloc">📍 NSW, Australia</div><div class="etitle">Energy And Mines Ex Australia Summit</div><div class="ehost"><div class="eav">JE</div>Jordan Eugenio · Training Coordinator · Sydney Opera House</div><a href="#" class="btn-gold" style="display:inline-flex;padding:9px 22px;font-size:.82rem;">Get A Ticket →</a></div>
+        <div class="ebox"><div class="ebox-mo">JULY 2024</div><div class="ebox-d">05</div><div class="ebox-t">10:30am–12:30pm</div></div>
+      </div>
+      <div class="erow reveal">
+        <div class="ethumb" style="background:linear-gradient(135deg,var(--gold),var(--gold-bright))">📚</div>
+        <div class="ebody"><div class="eloc">📍 NSW, Australia</div><div class="etitle">Learn Exactly How We Made Event</div><div class="ehost"><div class="eav" style="background:var(--teal);color:var(--white)">SY</div>Serhiy Yaroslav · Peer Support Leader · Sydney Opera House</div><a href="#" class="btn-gold" style="display:inline-flex;padding:9px 22px;font-size:.82rem;">Get A Ticket →</a></div>
+        <div class="ebox"><div class="ebox-mo">OCT 2024</div><div class="ebox-d">24</div><div class="ebox-t">10:30am–12:30pm</div></div>
+      </div>
+      <div class="erow reveal">
+        <div class="ethumb" style="background:linear-gradient(135deg,#2a6f94,var(--teal))">🏆</div>
+        <div class="ebody"><div class="eloc">📍 NSW, Australia</div><div class="etitle">DSC Annual NDIS Conference 2024</div><div class="ehost"><div class="eav">JE</div>Jordan Eugenio · Educational Presenter · Sydney Opera House</div><a href="#" class="btn-gold" style="display:inline-flex;padding:9px 22px;font-size:.82rem;">Get A Ticket →</a></div>
+        <div class="ebox"><div class="ebox-mo">DEC 2024</div><div class="ebox-d">19</div><div class="ebox-t">10:30am–12:30pm</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<div id="awards">
+  <div class="aw-inner">
+    <div>
+      <span class="aw-ey">Our Awards</span>
+      <h2>Prestigious Awards For Our Exceptional Work</h2>
+      <p>We've received prestigious awards as testament to our unwavering dedication and commitment to excellence. These accolades reflect the tireless passion of our entire team.</p>
+      <a href="#cta" class="btn-gold">Book An Appointment →</a>
+    </div>
+    <div class="aw-grid">
+      <div class="aw-b reveal"><div class="aw-b-icon">🏅</div><div class="aw-b-lbl">100% Trusted Provider</div></div>
+      <div class="aw-b reveal"><div class="aw-b-icon">⭐</div><div class="aw-b-lbl">Vintage Excellence</div></div>
+      <div class="aw-b reveal"><div class="aw-b-icon">🥇</div><div class="aw-b-lbl">Original Award</div></div>
+      <div class="aw-b reveal"><div class="aw-b-icon">🏆</div><div class="aw-b-lbl">Best NDIS Provider</div></div>
+      <div class="aw-b reveal"><div class="aw-b-icon">✨</div><div class="aw-b-lbl">Quality Star Award</div></div>
+      <div class="aw-b reveal"><div class="aw-b-icon">🎖️</div><div class="aw-b-lbl">Excellence Award</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLES -->
+<section id="articles">
+  <div class="si">
+    <span class="eyebrow">Latest News</span>
+    <h2 class="sec-title">Browse Our <em>Articles</em> &amp; Resources</h2>
+    <p class="sec-desc">Stay informed with the latest NDIS news, guides, and resources from the SunnyAid team.</p>
+    <div class="art-grid">
+      <div class="art-card reveal"><div class="art-thumb" style="background:linear-gradient(135deg,var(--teal),var(--teal-mid))">🤸</div><div class="art-body"><div class="art-tag">NDIS Tips</div><div class="art-title">Empowering Independence And The Role Of Daily Support</div><a href="#" class="art-link">Read More ↗</a></div></div>
+      <div class="art-card reveal"><div class="art-thumb" style="background:linear-gradient(135deg,var(--gold),var(--gold-bright))">🔍</div><div class="art-body"><div class="art-tag">Provider Guide</div><div class="art-title">Choosing The Right NDIS Provider And What To Look For</div><a href="#" class="art-link">Read More ↗</a></div></div>
+      <div class="art-card reveal"><div class="art-thumb" style="background:linear-gradient(135deg,var(--teal-mid),var(--teal-light))">💡</div><div class="art-body"><div class="art-tag">Funding</div><div class="art-title">Understanding NDIS Funding And How To Get The Most From Your Plan</div><a href="#" class="art-link">Read More ↗</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QR CODES -->
+<section id="qr-section">
+  <div class="si">
+    <span class="eyebrow">Scan &amp; Connect</span>
+    <h2 class="sec-title">Quick Access <em>QR Codes</em></h2>
+    <p class="sec-desc">Scan any QR code with your phone to instantly call, email, or visit our website — no typing needed.</p>
+    <div class="qr-grid">
+      <div class="qr-card reveal" onclick="openQR('phone')">
+        <div class="qr-icon-w">📞</div>
+        <div class="qr-lbl">Call Us</div>
+        <div class="qr-val">+61-8-8967-5083</div>
+        <div class="qr-box" id="qr-phone"></div>
+        <div class="qr-hint">Point your camera at this code to call SunnyAid directly from your phone — no dialling needed.</div>
+        <div class="qr-tag">📱 Tap to Enlarge</div>
+      </div>
+      <div class="qr-card reveal" onclick="openQR('email')">
+        <div class="qr-icon-w">✉️</div>
+        <div class="qr-lbl">Email Us</div>
+        <div class="qr-val">info@sunnyaid.com.au</div>
+        <div class="qr-box" id="qr-email"></div>
+        <div class="qr-hint">Scan to open a pre-addressed email to our support team, ready to send in seconds.</div>
+        <div class="qr-tag">📱 Tap to Enlarge</div>
+      </div>
+      <div class="qr-card reveal" onclick="openQR('web')">
+        <div class="qr-icon-w">🌐</div>
+        <div class="qr-lbl">Visit Website</div>
+        <div class="qr-val">www.sunnyaid.com.au</div>
+        <div class="qr-box" id="qr-web"></div>
+        <div class="qr-hint">Scan to visit SunnyAid online and explore all NDIS services and resources.</div>
+        <div class="qr-tag">📱 Tap to Enlarge</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QR MODAL -->
+<div class="qr-overlay" id="qrOverlay" onclick="closeQR(event)">
+  <div class="qr-modal">
+    <div class="qr-m-icon" id="qrMIcon">📞</div>
+    <h3 id="qrMTitle">Call Us</h3>
+    <p class="qr-m-sub" id="qrMSub">Scan with your phone camera</p>
+    <div class="qr-m-box" id="qr-large"></div>
+    <div class="qr-m-val" id="qrMVal">+61-8-8967-5083</div>
+    <button class="qr-m-close" onclick="closeQR()">✕ Close</button>
+  </div>
+</div>
+
+<!-- CTA -->
+<div id="cta">
+  <div class="cta-inner">
+    <span class="cta-ey">Get Disability Benefit</span>
+    <h2>Ready to Start Your NDIS Journey with SunnyAid?</h2>
+    <p>Schedule a call with us and we'll get back to you within 24 hours to discuss how we can support you and your family.</p>
+    <div class="cta-btns">
+      <a href="tel:+61889675083" class="btn-gold">📞 Schedule A Callback</a>
+      <a href="mailto:info@sunnyaid.com.au" class="btn-ghost">✉️ Send Us A Message</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid">
+    <div>
+      <span class="ft-logo">Sunny<span>Aid</span></span>
+      <p class="ft-desc">Australia's trusted NDIS disability service provider for 26 years. Supporting individuals across QLD, NSW, VIC, and WA to live their best lives.</p>
+      <div class="ft-contacts">
+        <a href="tel:+61889675083">📞 +61-8-8967-5083</a>
+        <a href="mailto:info@sunnyaid.com.au">✉️ info@sunnyaid.com.au</a>
+        <a href="#">📍 Sunshine Business Park, NSW</a>
+      </div>
+    </div>
+    <div class="ft-col">
+      <h4>Need Help</h4>
+      <ul>
+        <li><a href="#">Donate Us</a></li><li><a href="#">Our Team</a></li>
+        <li><a href="#">Fundraise For Us</a></li><li><a href="#">Volunteer With Us</a></li>
+        <li><a href="#">Home Care App</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>We Give Care</h4>
+      <ul>
+        <li><a href="#">Queensland</a></li><li><a href="#">NSW &amp; ACT</a></li>
+        <li><a href="#">Victoria</a></li><li><a href="#">Western Australia</a></li>
+      </ul>
+    </div>
+    <div class="ft-col ft-sub">
+      <h4>Stay Informed</h4>
+      <p>A weekly digest of NDIS news, articles and resources from the SunnyAid team.</p>
+      <div class="sub-row">
+        <input type="email" placeholder="Your email address">
+        <button>Join</button>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <p class="ft-copy">© 2024 SunnyAid. All rights reserved. NDIS Registered Provider #4050072735</p>
+    <div class="ft-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<!-- CHAT FAB -->
+<button class="chat-fab" onclick="toggleChat()">
+  💬<span class="notif" id="chatNotif">1</span>
+</button>
+
+<!-- CHAT WINDOW -->
+<div class="chat-win" id="chatWin">
+  <div class="ch-header">
+    <div class="ch-av">🌟</div>
+    <div class="ch-info">
+      <h4>SunnyAid Support</h4>
+      <p><span class="sdot"></span>Online · Replies instantly</p>
+    </div>
+    <button class="ch-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="ch-dt">
+    <span class="ch-dt-time" id="chatTime">--:-- --</span>
+    <span class="ch-dt-date" id="chatDate">Loading...</span>
+  </div>
+  <div class="ch-msgs" id="chatMsgs">
+    <div class="msg bot">
+      <div class="msg-b">👋 G'day! Welcome to SunnyAid. I'm your NDIS support assistant. How can I help you today?</div>
+      <div class="msg-t" id="initMsgTime"></div>
+    </div>
+  </div>
+  <div class="ch-qr" id="chatQR">
+    <button class="qbtn" onclick="sendQ('What services do you offer?')">Our Services</button>
+    <button class="qbtn" onclick="sendQ('How do I apply for NDIS?')">Apply for NDIS</button>
+    <button class="qbtn" onclick="sendQ('What states do you cover?')">Coverage Areas</button>
+    <button class="qbtn" onclick="sendQ('How much does it cost?')">Pricing Info</button>
+  </div>
+  <div class="ch-input-row">
+    <input class="ch-in" id="chatIn" type="text" placeholder="Type your message…" onkeydown="if(event.key==='Enter')sendMsg()">
+    <button class="ch-send" onclick="sendMsg()">➤</button>
+  </div>
+</div>
+
+<script>
+// ── CLOCK ──
+function updateClock(){
+  const now = new Date();
+  const t = now.toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  const ds = now.toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+  const dl = now.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('navTime').textContent = t;
+  document.getElementById('navDate').textContent = ds;
+  document.getElementById('chatTime').textContent = t;
+  document.getElementById('chatDate').textContent = dl;
+  document.getElementById('initMsgTime').textContent = now.toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit'});
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+  let cur = '';
+  document.querySelectorAll('section[id], div[id]').forEach(s => {
+    if (s.offsetTop - 90 <= window.scrollY) cur = s.id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+});
+
+// ── MOBILE MENU ──
+function openMob()  { document.getElementById('mobMenu').classList.add('open'); }
+function closeMob() { document.getElementById('mobMenu').classList.remove('open'); }
+
+// ── SCROLL REVEAL ──
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: .12 });
+document.querySelectorAll('.reveal, .scard, .tcard, .acard, .aw-b, .erow, .pcard, .art-card, .hcard, .step, .hero-stat, .qr-card').forEach(el => {
+  el.classList.add('reveal'); ro.observe(el);
+});
+
+// ── QR CODES ──
+const QR_DATA = {
+  phone: { url: 'tel:+61889675083',           icon: '📞', title: 'Call SunnyAid',  sub: 'Point your camera to dial instantly',       val: '+61-8-8967-5083'      },
+  email: { url: 'mailto:info@sunnyaid.com.au', icon: '✉️', title: 'Email SunnyAid', sub: 'Scan to open a new email to our team',     val: 'info@sunnyaid.com.au' },
+  web:   { url: 'https://www.sunnyaid.com.au', icon: '🌐', title: 'Visit Website',  sub: 'Scan to open SunnyAid in your browser',   val: 'www.sunnyaid.com.au'  }
+};
+
+function makeQR(id, url, size) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = '';
+  new QRCode(el, { text: url, width: size, height: size, colorDark: '#0d3347', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.H });
+}
+
+window.addEventListener('load', () => {
+  makeQR('qr-phone', QR_DATA.phone.url, 130);
+  makeQR('qr-email', QR_DATA.email.url, 130);
+  makeQR('qr-web',   QR_DATA.web.url,   130);
+});
+
+function openQR(key) {
+  const d = QR_DATA[key];
+  document.getElementById('qrMIcon').textContent = d.icon;
+  document.getElementById('qrMTitle').textContent = d.title;
+  document.getElementById('qrMSub').textContent   = d.sub;
+  document.getElementById('qrMVal').textContent   = d.val;
+  makeQR('qr-large', d.url, 182);
+  document.getElementById('qrOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeQR(e) {
+  if (!e || e.target === document.getElementById('qrOverlay') || !e.target) {
+    document.getElementById('qrOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQR(); });
+
+// ── CHAT ──
+const SYS = `You are a friendly and knowledgeable support assistant for SunnyAid, an Australian NDIS (National Disability Insurance Scheme) registered disability services provider. Speak in a warm, helpful, Australian-friendly tone.
+
+About SunnyAid:
+- 26+ years as a trusted NDIS provider
+- Registered Provider #4050072735
+- Coverage: Queensland, NSW & ACT, Victoria, Western Australia
+- Phone: +61-8-8967-5083
+- Email: info@sunnyaid.com.au
+- 220+ expert team members, 98% client satisfaction
+
+Services:
+1. Therapeutic Support
+2. Daily Living & Life Skills
+3. Support & Connection
+4. Daily Life Assistance
+5. NDIS Speech Therapy
+6. Community & Activities
+7. NDIS Plan Management
+8. Specialist Support Coordination
+
+Getting started: Make enquiry → Create NDIS Plan → Start Exceptional Care
+Keep responses concise (2-4 sentences), helpful and warm. For urgent help direct to +61-8-8967-5083.`;
+
+let history = [], chatOpen = false;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chatWin').classList.toggle('open', chatOpen);
+  document.getElementById('chatNotif').style.display = chatOpen ? 'none' : 'flex';
+  if (chatOpen) document.getElementById('chatIn').focus();
+}
+
+function getT() { return new Date().toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit'}); }
+
+function addMsg(txt, role) {
+  const c = document.getElementById('chatMsgs');
+  const d = document.createElement('div');
+  d.className = `msg ${role}`;
+  d.innerHTML = `<div class="msg-b">${txt}</div><div class="msg-t">${getT()}</div>`;
+  c.appendChild(d); c.scrollTop = c.scrollHeight;
+}
+
+function showTyping() {
+  const c = document.getElementById('chatMsgs');
+  const d = document.createElement('div');
+  d.className = 'msg bot'; d.id = 'typo';
+  d.innerHTML = '<div class="msg-b"><div class="typing"><span></span><span></span><span></span></div></div>';
+  c.appendChild(d); c.scrollTop = c.scrollHeight;
+}
+
+function removeTyping() { const t = document.getElementById('typo'); if (t) t.remove(); }
+
+function sendQ(txt) {
+  document.getElementById('chatIn').value = txt;
+  document.getElementById('chatQR').style.display = 'none';
+  sendMsg();
+}
+
+async function sendMsg() {
+  const inp = document.getElementById('chatIn');
+  const txt = inp.value.trim(); if (!txt) return;
+  inp.value = '';
+  addMsg(txt, 'user');
+  history.push({ role: 'user', content: txt });
+  showTyping();
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: SYS, messages: history })
+    });
+    const data = await r.json();
+    removeTyping();
+    const rep = data.content?.[0]?.text || "I'm sorry, I couldn't process that. Please call us on +61-8-8967-5083.";
+    addMsg(rep, 'bot');
+    history.push({ role: 'assistant', content: rep });
+  } catch (err) {
+    removeTyping();
+    addMsg("Sorry, I'm having trouble connecting right now. Please call us on 📞 +61-8-8967-5083 and we'll be happy to help!", 'bot');
+  }
+}
+</script>
+</body>
+</html>
