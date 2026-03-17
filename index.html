@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SunnyAid – Australia's trusted NDIS registered disability services provider for 26 years. Supporting participants across QLD, NSW, VIC & WA.">
+  <meta name="theme-color" content="#0d3347">
+  <title>SunnyAid – NDIS Disability Services Australia</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+
+  <!-- QR Code Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ═══ MOBILE MENU ═══ -->
+  <div class="mob-menu" id="mobMenu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="mob-close" onclick="closeMob()" aria-label="Close menu">✕</button>
+    <nav class="mob-nav">
+      <a href="#hero"       onclick="closeMob()">Home</a>
+      <a href="#about"      onclick="closeMob()">About</a>
+      <a href="#services"   onclick="closeMob()">Services</a>
+      <a href="#events"     onclick="closeMob()">Events</a>
+      <a href="#articles"   onclick="closeMob()">Blog</a>
+      <a href="#qr-section" onclick="closeMob()">QR Codes</a>
+      <a href="#cta"        onclick="closeMob()">Contact</a>
+    </nav>
+    <div class="mob-contact">
+      <a href="tel:+61889675083" class="btn-gold">📞 Call Now</a>
+    </div>
+  </div>
+
+  <!-- ═══ NAVIGATION ═══ -->
+  <header id="mainNav" role="banner">
+    <a href="#hero" class="nav-brand" aria-label="SunnyAid home">
+      <div class="nav-icon" aria-hidden="true">☀️</div>
+      <span class="nav-logo">Sunny<em>Aid</em></span>
+    </a>
+
+    <nav class="nav-links" role="navigation" aria-label="Main navigation">
+      <a href="#hero"     class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#events">Events</a>
+      <a href="#articles">Blog</a>
+      <a href="#qr-section">QR Codes</a>
+      <a href="#cta">Contact</a>
+    </nav>
+
+    <div class="nav-right">
+      <div class="nav-datetime" aria-live="polite" aria-atomic="true">
+        <span class="nav-time" id="navTime">--:-- --</span>
+        <span class="nav-date" id="navDate">Loading…</span>
+      </div>
+      <a href="tel:+61889675083" class="nav-cta">
+        <span aria-hidden="true">📞</span> +61-8-8967-5083
+      </a>
+      <button class="hamburger" onclick="openMob()" aria-label="Open menu" aria-expanded="false" id="hamburgerBtn">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <section id="hero" aria-labelledby="heroTitle">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-orb hero-orb-3"></div>
+      <div class="hero-lines"></div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-pill">
+          <span class="hero-dot" aria-hidden="true"></span>
+          Australia's Trusted NDIS Provider
+        </div>
+
+        <h1 class="hero-title" id="heroTitle">
+          We're Here For Your<br>
+          Whole NDIS <em>Disability</em><br>
+          Journey
+        </h1>
+
+        <p class="hero-desc">
+          Personalised care and support delivered by 220+ expert team members across Queensland, NSW, Victoria, and Western Australia.
+        </p>
+
+        <div class="hero-btns">
+          <a href="#cta"   class="btn-gold">Book Appointment <span aria-hidden="true">→</span></a>
+          <a href="#about" class="btn-ghost">Our Story <span aria-hidden="true">↓</span></a>
+        </div>
+
+        <div class="hero-stats" role="list">
+          <div class="hero-stat" role="listitem">
+            <span class="hero-stat-num" data-count="220">0</span><span class="hero-stat-num">+</span>
+            <span class="hero-stat-label">Expert Team Members</span>
+          </div>
+          <div class="hero-stat-divider" aria-hidden="true"></div>
+          <div class="hero-stat" role="listitem">
+            <span class="hero-stat-num" data-count="98">0</span><span class="hero-stat-num">%</span>
+            <span class="hero-stat-label">Client Satisfaction</span>
+          </div>
+          <div class="hero-stat-divider" aria-hidden="true"></div>
+          <div class="hero-stat" role="listitem">
+            <span class="hero-stat-num" data-count="26">0</span><span class="hero-stat-num">yrs</span>
+            <span class="hero-stat-label">Trusted Experience</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-cards">
+          <div class="hcard">
+            <div class="hcard-icon">🏠</div>
+            <h3>Home Care Support</h3>
+            <p>Professional workers helping you live independently at home.</p>
+          </div>
+          <div class="hcard">
+            <div class="hcard-icon">🌱</div>
+            <h3>Personal Growth</h3>
+            <p>Tailored plans focused on skill development and goals.</p>
+          </div>
+          <div class="hcard hcard-wide">
+            <div class="hcard-icon">🎯</div>
+            <div>
+              <h3>Support Coordination</h3>
+              <p>Expert coordinators helping you navigate and maximise your NDIS plan effectively across all four states.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-badge">
+          <div class="hb-icon">✅</div>
+          <div>
+            <strong>NDIS Registered Provider</strong>
+            <span>#4050072735</span>
+          </div>
+        </div>
+
+        <div class="hero-scroll-hint">
+          <span>Scroll to explore</span>
+          <div class="scroll-arrow"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TRUST BAR ═══ -->
+  <div class="trust-bar" role="complementary" aria-label="Credentials and coverage">
+    <div class="trust-inner">
+      <p class="trust-text">Trusted by <strong>500+ Teams</strong> · Empowering <strong>200,000+ People</strong></p>
+      <div class="trust-items">
+        <span class="trust-item">⭐ GoodFirms 4.6</span>
+        <span class="trust-item">⭐ Clutch 4.8</span>
+        <span class="trust-item">🗺️ QLD · NSW · VIC · WA</span>
+        <span class="trust-item">🛡️ NDIS Registered</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="about" aria-labelledby="aboutTitle">
+    <div class="about-inner">
+      <div class="about-content">
+        <span class="eyebrow">About SunnyAid</span>
+        <h2 id="aboutTitle">NDIS Disability Service<br>Provider For <em>26 Years</em></h2>
+        <p>For 26 years, we've been a trusted NDIS Disability Service Provider, delivering personalised care and support to empower individuals across Queensland, NSW, Victoria, and Western Australia.</p>
+
+        <div class="about-stats">
+          <div class="ast">
+            <span class="ast-num">26+</span>
+            <span class="ast-lbl">Years Experience</span>
+          </div>
+          <div class="ast">
+            <span class="ast-num">4</span>
+            <span class="ast-lbl">States Covered</span>
+          </div>
+          <div class="ast">
+            <span class="ast-num">200k+</span>
+            <span class="ast-lbl">People Helped</span>
+          </div>
+        </div>
+
+        <a href="#cta" class="btn-gold">Get Started →</a>
+      </div>
+
+      <div class="about-cards">
+        <div class="acard reveal">
+          <div class="acard-icon">🏠</div>
+          <div>
+            <h3>We're Home Care</h3>
+            <p>Professional support workers helping you live independently at home with dignity and comfort.</p>
+          </div>
+        </div>
+        <div class="acard reveal">
+          <div class="acard-icon">🌱</div>
+          <div>
+            <h3>Personal Care &amp; Growth</h3>
+            <p>Tailored plans focused on your personal growth, skill development, and community participation.</p>
+          </div>
+        </div>
+        <div class="acard reveal">
+          <div class="acard-icon">🎯</div>
+          <div>
+            <h3>Support Coordinators</h3>
+            <p>Expert coordinators helping you navigate and maximise your NDIS plan effectively.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SERVICES ═══ -->
+  <section id="services" aria-labelledby="servicesTitle">
+    <div class="si">
+      <span class="eyebrow">What We Offer</span>
+      <h2 class="sec-title" id="servicesTitle">Our Main <em>Services</em></h2>
+      <p class="sec-desc">Comprehensive NDIS disability services tailored to your individual needs and goals.</p>
+
+      <div class="svc-grid" role="list">
+        <article class="scard reveal" role="listitem" tabindex="0">
+          <div class="sc-icon" aria-hidden="true">🧠</div>
+          <h3 class="sc-title">Therapeutic Support</h3>
+          <p class="sc-desc">Evidence-based therapy and wellbeing interventions designed around your unique care plan and goals.</p>
+          <span class="sc-more" aria-hidden="true">Read More ↗</span>
+        </article>
+
+        <article class="scard scard-feat reveal" role="listitem" tabindex="0">
+          <div class="sc-icon" aria-hidden="true">🏡</div>
+          <h3 class="sc-title">Daily Living &amp; Life Skills</h3>
+          <p class="sc-desc">Support to navigate everyday tasks with confidence, independence and dignity in your own home.</p>
+          <span class="sc-more" aria-hidden="true">Read More ↗</span>
+        </article>
+
+        <article class="scard reveal" role="listitem" tabindex="0">
+          <div class="sc-icon" aria-hidden="true">🤝</div>
+          <h3 class="sc-title">Support &amp; Connection</h3>
+          <p class="sc-desc">Meaningful community engagement and social participation to build fulfilling relationships.</p>
+          <span class="sc-more" aria-hidden="true">Read More ↗</span>
+        </article>
+
+        <article class="scard reveal" role="listitem" tabindex="0">
+          <div class="sc-icon" aria-hidden="true">🛡️</div>
+          <h3 class="sc-title">Daily Life Assistance</h3>
+          <p class="sc-desc">Personal care and home tasks tailored to help you live comfortably and independently every day.</p>
+          <span class="sc-more" aria-hidden="true">Read More ↗</span>
+        </article>
+
+        <article class="scard reveal" role="listitem" tabindex="0">
+          <div class="sc-icon" aria-hidden="true">🗣️</div>
+          <h3 class="sc-title">NDIS Speech Therapy</h3>
+          <p class="sc-desc">Specialist communication support to improve language skills and overall quality of life.</p>
+          <span class="sc-more" aria-hidden="true">Read More ↗</span>
+        </article>
+
+        <article class="scard reveal" role="listitem" tabindex="0">
+          <div class="sc-icon" aria-hidden="true">🎉</div>
+          <h3 class="sc-title">Community &amp; Activities</h3>
+          <p class="sc-desc">Engaging social programs and group activities to enrich your life and connect you to the community.</p>
+          <span class="sc-more" aria-hidden="true">Read More ↗</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section id="how" aria-labelledby="howTitle">
+    <div class="si">
+      <span class="eyebrow">Our Process</span>
+      <h2 class="sec-title" id="howTitle">Get Started In Just <em>3 Steps</em></h2>
+      <p class="sec-desc">A simple, transparent process to begin your NDIS journey with SunnyAid.</p>
+
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-ring">
+            <span aria-hidden="true">📞</span>
+            <span class="step-badge" aria-hidden="true">01</span>
+          </div>
+          <h3>Make An Enquiry</h3>
+          <p>Reach out and we'll answer all your questions about our services, eligibility, and how we can help.</p>
+        </div>
+
+        <div class="step-connector" aria-hidden="true">
+          <div class="step-line"></div>
+          <div class="step-arrow">→</div>
+        </div>
+
+        <div class="step reveal">
+          <div class="step-ring">
+            <span aria-hidden="true">📋</span>
+            <span class="step-badge" aria-hidden="true">02</span>
+          </div>
+          <h3>Create A NDIS Plan</h3>
+          <p>We craft a personalised NDIS plan that addresses your specific needs, goals, and aspirations.</p>
+        </div>
+
+        <div class="step-connector" aria-hidden="true">
+          <div class="step-line"></div>
+          <div class="step-arrow">→</div>
+        </div>
+
+        <div class="step reveal">
+          <div class="step-ring">
+            <span aria-hidden="true">✨</span>
+            <span class="step-badge" aria-hidden="true">03</span>
+          </div>
+          <h3>Start Exceptional Care</h3>
+          <p>Begin your journey with us, where exceptional care and support helps you thrive every day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PLAN MANAGEMENT ═══ -->
+  <section id="plan" aria-labelledby="planTitle">
+    <div class="si">
+      <span class="eyebrow">How We Help</span>
+      <h2 class="sec-title" id="planTitle">Getting Started With <em>A New Plan</em></h2>
+      <p class="sec-desc">Discover how SunnyAid helps you manage and maximise your NDIS funding.</p>
+
+      <div class="plan-grid">
+        <div class="pcard reveal">
+          <h3>NDIS Plan Management</h3>
+          <p>Managing your NDIS budget doesn't have to be complicated. You choose the providers, we handle the invoices.</p>
+          <div class="p-lbl">With SunnyAid, You Can:</div>
+          <ul>
+            <li>Track NDIS funds 24/7</li>
+            <li>Pay invoices fast and accurately</li>
+            <li>Reserve funding for preferred providers</li>
+            <li>Process your expenses easily</li>
+            <li>Take control of your NDIS budget</li>
+            <li>Access support and advice anytime</li>
+          </ul>
+          <a href="#cta" class="btn-gold">NDIS Plan Management →</a>
+        </div>
+
+        <div class="pcard pcard-light reveal">
+          <h3>NDIS Specialist Support</h3>
+          <p>Our expert Support Coordinators are here to make your NDIS journey easier and more effective.</p>
+          <div class="p-lbl">With SunnyAid, You Can:</div>
+          <ul>
+            <li>Better understand your NDIS plan</li>
+            <li>Connect with the right service providers</li>
+            <li>Get NDIS planning and review assistance</li>
+            <li>Build and maintain your independence</li>
+            <li>Reach your plan goals faster</li>
+            <li>Access expert advice when needed</li>
+          </ul>
+          <a href="#cta" class="btn-gold">NDIS Specialist Support →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section id="testimonials" aria-labelledby="testiTitle">
+    <div class="si">
+      <span class="eyebrow">Testimonials</span>
+      <h2 class="sec-title" id="testiTitle">Why Clients <em>Love Us</em></h2>
+      <p class="sec-desc">Hear what our clients and their families say about the SunnyAid difference.</p>
+
+      <div class="testi-grid">
+        <blockquote class="tcard reveal">
+          <div class="tcard-head">
+            <div class="tcard-av" style="--av-bg:#0d3347;--av-fg:#fff">S</div>
+            <div>
+              <div class="tcard-role">Our Client</div>
+              <cite class="tcard-name">Sophia Brown</cite>
+              <div class="stars" aria-label="5 stars">★★★★★</div>
+            </div>
+          </div>
+          <p class="tcard-q">I'm grateful to SunnyAid for their exceptional care and support. Their understanding and assistance empowered me to navigate the NDIS system confidently and independently.</p>
+        </blockquote>
+
+        <blockquote class="tcard reveal">
+          <div class="tcard-head">
+            <div class="tcard-av" style="--av-bg:#d4952a;--av-fg:#0d3347">L</div>
+            <div>
+              <div class="tcard-role">Our Client</div>
+              <cite class="tcard-name">Liam Johnson</cite>
+              <div class="stars" aria-label="5 stars">★★★★★</div>
+            </div>
+          </div>
+          <p class="tcard-q">SunnyAid provided exceptional support for my son's NDIS journey. Their dedication helped us navigate the system with ease. I'm grateful for their compassionate approach.</p>
+        </blockquote>
+
+        <blockquote class="tcard reveal">
+          <div class="tcard-head">
+            <div class="tcard-av" style="--av-bg:#4ade80;--av-fg:#0d3347">M</div>
+            <div>
+              <div class="tcard-role">Parent / Carer</div>
+              <cite class="tcard-name">Maria Chen</cite>
+              <div class="stars" aria-label="5 stars">★★★★★</div>
+            </div>
+          </div>
+          <p class="tcard-q">The support coordinators at SunnyAid went above and beyond to ensure my daughter received the best care. We couldn't be more thankful for their professionalism and warmth.</p>
+        </blockquote>
+
+        <blockquote class="tcard reveal">
+          <div class="tcard-head">
+            <div class="tcard-av" style="--av-bg:#a78bfa;--av-fg:#fff">D</div>
+            <div>
+              <div class="tcard-role">NDIS Participant</div>
+              <cite class="tcard-name">David Nguyen</cite>
+              <div class="stars" aria-label="5 stars">★★★★★</div>
+            </div>
+          </div>
+          <p class="tcard-q">From plan management to daily support, SunnyAid has transformed my life. The team is always responsive, caring, and genuinely invested in helping me reach my goals.</p>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ EVENTS ═══ -->
+  <section id="events" aria-labelledby="eventsTitle">
+    <div class="si">
+      <span class="eyebrow">Featured Events</span>
+      <h2 class="sec-title" id="eventsTitle">Join Our Upcoming <em>Events</em></h2>
+      <p class="sec-desc">Connect, learn, and grow with the SunnyAid community.</p>
+
+      <div class="events-list">
+        <article class="erow reveal">
+          <div class="ethumb" style="--thumb-a:#0d3347;--thumb-b:#1a4d6b" aria-hidden="true">🎤</div>
+          <div class="ebody">
+            <div class="eloc">📍 NSW, Australia</div>
+            <h3 class="etitle">Energy And Mines Ex Australia Summit</h3>
+            <div class="ehost">
+              <div class="eav">JE</div>
+              Jordan Eugenio · Training Coordinator · Sydney Opera House
+            </div>
+            <a href="#" class="btn-gold" style="display:inline-flex;padding:9px 22px;font-size:.82rem;">Get A Ticket →</a>
+          </div>
+          <div class="ebox">
+            <span class="ebox-mo">JULY 2024</span>
+            <span class="ebox-d">05</span>
+            <span class="ebox-t">10:30am–12:30pm</span>
+          </div>
+        </article>
+
+        <article class="erow reveal">
+          <div class="ethumb" style="--thumb-a:#d4952a;--thumb-b:#f0b73a" aria-hidden="true">📚</div>
+          <div class="ebody">
+            <div class="eloc">📍 NSW, Australia</div>
+            <h3 class="etitle">Learn Exactly How We Made Event</h3>
+            <div class="ehost">
+              <div class="eav" style="background:var(--teal);color:var(--white)">SY</div>
+              Serhiy Yaroslav · Peer Support Leader · Sydney Opera House
+            </div>
+            <a href="#" class="btn-gold" style="display:inline-flex;padding:9px 22px;font-size:.82rem;">Get A Ticket →</a>
+          </div>
+          <div class="ebox">
+            <span class="ebox-mo">OCT 2024</span>
+            <span class="ebox-d">24</span>
+            <span class="ebox-t">10:30am–12:30pm</span>
+          </div>
+        </article>
+
+        <article class="erow reveal">
+          <div class="ethumb" style="--thumb-a:#2a6f94;--thumb-b:#0d3347" aria-hidden="true">🏆</div>
+          <div class="ebody">
+            <div class="eloc">📍 NSW, Australia</div>
+            <h3 class="etitle">DSC Annual NDIS Conference 2024</h3>
+            <div class="ehost">
+              <div class="eav">JE</div>
+              Jordan Eugenio · Educational Presenter · Sydney Opera House
+            </div>
+            <a href="#" class="btn-gold" style="display:inline-flex;padding:9px 22px;font-size:.82rem;">Get A Ticket →</a>
+          </div>
+          <div class="ebox">
+            <span class="ebox-mo">DEC 2024</span>
+            <span class="ebox-d">19</span>
+            <span class="ebox-t">10:30am–12:30pm</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AWARDS ═══ -->
+  <section id="awards" aria-labelledby="awardsTitle">
+    <div class="aw-inner">
+      <div>
+        <span class="eyebrow-light">Our Awards</span>
+        <h2 id="awardsTitle">Prestigious Awards For Our <em>Exceptional</em> Work</h2>
+        <p>We've received prestigious awards as testament to our unwavering dedication and commitment to excellence. These accolades reflect the tireless passion of our entire team.</p>
+        <a href="#cta" class="btn-gold">Book An Appointment →</a>
+      </div>
+
+      <div class="aw-grid">
+        <div class="aw-b reveal"><span class="aw-b-icon" aria-hidden="true">🏅</span><span class="aw-b-lbl">100% Trusted Provider</span></div>
+        <div class="aw-b reveal"><span class="aw-b-icon" aria-hidden="true">⭐</span><span class="aw-b-lbl">Vintage Excellence</span></div>
+        <div class="aw-b reveal"><span class="aw-b-icon" aria-hidden="true">🥇</span><span class="aw-b-lbl">Original Award</span></div>
+        <div class="aw-b reveal"><span class="aw-b-icon" aria-hidden="true">🏆</span><span class="aw-b-lbl">Best NDIS Provider</span></div>
+        <div class="aw-b reveal"><span class="aw-b-icon" aria-hidden="true">✨</span><span class="aw-b-lbl">Quality Star Award</span></div>
+        <div class="aw-b reveal"><span class="aw-b-icon" aria-hidden="true">🎖️</span><span class="aw-b-lbl">Excellence Award</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ARTICLES ═══ -->
+  <section id="articles" aria-labelledby="articlesTitle">
+    <div class="si">
+      <span class="eyebrow">Latest News</span>
+      <h2 class="sec-title" id="articlesTitle">Browse Our <em>Articles</em> &amp; Resources</h2>
+      <p class="sec-desc">Stay informed with the latest NDIS news, guides, and resources from the SunnyAid team.</p>
+
+      <div class="art-grid">
+        <article class="art-card reveal">
+          <div class="art-thumb" style="--art-a:var(--teal);--art-b:var(--teal-mid)" aria-hidden="true">🤸</div>
+          <div class="art-body">
+            <div class="art-tag">NDIS Tips</div>
+            <h3 class="art-title">Empowering Independence And The Role Of Daily Support</h3>
+            <a href="#" class="art-link">Read More <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="art-card reveal">
+          <div class="art-thumb" style="--art-a:var(--gold);--art-b:var(--gold-bright)" aria-hidden="true">🔍</div>
+          <div class="art-body">
+            <div class="art-tag">Provider Guide</div>
+            <h3 class="art-title">Choosing The Right NDIS Provider And What To Look For</h3>
+            <a href="#" class="art-link">Read More <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="art-card reveal">
+          <div class="art-thumb" style="--art-a:var(--teal-mid);--art-b:var(--teal-light)" aria-hidden="true">💡</div>
+          <div class="art-body">
+            <div class="art-tag">Funding</div>
+            <h3 class="art-title">Understanding NDIS Funding And How To Get The Most From Your Plan</h3>
+            <a href="#" class="art-link">Read More <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ QR CODES ═══ -->
+  <section id="qr-section" aria-labelledby="qrTitle">
+    <div class="si">
+      <span class="eyebrow">Scan &amp; Connect</span>
+      <h2 class="sec-title" id="qrTitle">Quick Access <em>QR Codes</em></h2>
+      <p class="sec-desc">Scan any QR code with your phone to instantly call, email, or visit our website — no typing needed.</p>
+
+      <div class="qr-grid">
+        <div class="qr-card reveal" onclick="openQR('phone')" role="button" tabindex="0" aria-label="Enlarge phone QR code">
+          <div class="qr-icon-w" aria-hidden="true">📞</div>
+          <div class="qr-lbl">Call Us</div>
+          <div class="qr-val">+61-8-8967-5083</div>
+          <div class="qr-box" id="qr-phone" aria-label="QR code to call SunnyAid"></div>
+          <p class="qr-hint">Point your camera at this code to call SunnyAid directly from your phone — no dialling needed.</p>
+          <div class="qr-tag" aria-hidden="true">📱 Tap to Enlarge</div>
+        </div>
+
+        <div class="qr-card reveal" onclick="openQR('email')" role="button" tabindex="0" aria-label="Enlarge email QR code">
+          <div class="qr-icon-w" aria-hidden="true">✉️</div>
+          <div class="qr-lbl">Email Us</div>
+          <div class="qr-val">info@sunnyaid.com.au</div>
+          <div class="qr-box" id="qr-email" aria-label="QR code to email SunnyAid"></div>
+          <p class="qr-hint">Scan to open a pre-addressed email to our support team, ready to send in seconds.</p>
+          <div class="qr-tag" aria-hidden="true">📱 Tap to Enlarge</div>
+        </div>
+
+        <div class="qr-card reveal" onclick="openQR('web')" role="button" tabindex="0" aria-label="Enlarge website QR code">
+          <div class="qr-icon-w" aria-hidden="true">🌐</div>
+          <div class="qr-lbl">Visit Website</div>
+          <div class="qr-val">www.sunnyaid.com.au</div>
+          <div class="qr-box" id="qr-web" aria-label="QR code to visit SunnyAid website"></div>
+          <p class="qr-hint">Scan to visit SunnyAid online and explore all NDIS services and resources.</p>
+          <div class="qr-tag" aria-hidden="true">📱 Tap to Enlarge</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ QR MODAL ═══ -->
+  <div class="qr-overlay" id="qrOverlay" role="dialog" aria-modal="true" aria-labelledby="qrModalTitle" onclick="closeQR(event)">
+    <div class="qr-modal">
+      <div class="qr-m-icon" id="qrMIcon" aria-hidden="true">📞</div>
+      <h2 class="qr-m-title" id="qrModalTitle" id="qrMTitle">Call Us</h2>
+      <p class="qr-m-sub" id="qrMSub">Scan with your phone camera</p>
+      <div class="qr-m-box" id="qr-large" aria-label="Enlarged QR code"></div>
+      <div class="qr-m-val" id="qrMVal">+61-8-8967-5083</div>
+      <button class="btn-close" onclick="closeQR()" aria-label="Close QR code modal">✕ Close</button>
+    </div>
+  </div>
+
+  <!-- ═══ CTA ═══ -->
+  <section id="cta" aria-labelledby="ctaTitle">
+    <div class="cta-inner">
+      <span class="eyebrow-light">Get Disability Benefit</span>
+      <h2 id="ctaTitle">Ready to Start Your NDIS Journey with SunnyAid?</h2>
+      <p>Schedule a call with us and we'll get back to you within 24 hours to discuss how we can support you and your family.</p>
+      <div class="cta-btns">
+        <a href="tel:+61889675083"          class="btn-gold">📞 Schedule A Callback</a>
+        <a href="mailto:info@sunnyaid.com.au" class="btn-ghost">✉️ Send Us A Message</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer role="contentinfo">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <span class="ft-logo">Sunny<em>Aid</em></span>
+        <p class="ft-desc">Australia's trusted NDIS disability service provider for 26 years. Supporting individuals across QLD, NSW, VIC, and WA to live their best lives.</p>
+        <address class="ft-contacts">
+          <a href="tel:+61889675083">📞 +61-8-8967-5083</a>
+          <a href="mailto:info@sunnyaid.com.au">✉️ info@sunnyaid.com.au</a>
+          <a href="#">📍 Sunshine Business Park, NSW</a>
+        </address>
+      </div>
+
+      <div class="ft-col">
+        <h3>Need Help</h3>
+        <ul>
+          <li><a href="#">Donate Us</a></li>
+          <li><a href="#">Our Team</a></li>
+          <li><a href="#">Fundraise For Us</a></li>
+          <li><a href="#">Volunteer With Us</a></li>
+          <li><a href="#">Home Care App</a></li>
+        </ul>
+      </div>
+
+      <div class="ft-col">
+        <h3>We Give Care</h3>
+        <ul>
+          <li><a href="#">Queensland</a></li>
+          <li><a href="#">NSW &amp; ACT</a></li>
+          <li><a href="#">Victoria</a></li>
+          <li><a href="#">Western Australia</a></li>
+        </ul>
+      </div>
+
+      <div class="ft-col ft-sub">
+        <h3>Stay Informed</h3>
+        <p>A weekly digest of NDIS news, articles and resources from the SunnyAid team.</p>
+        <div class="sub-row">
+          <label for="emailSub" class="sr-only">Your email address</label>
+          <input type="email" id="emailSub" placeholder="Your email address" autocomplete="email">
+          <button type="button" onclick="subscribeEmail()">Join</button>
+        </div>
+        <p class="sub-confirm" id="subConfirm" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <div class="ft-bottom">
+      <p class="ft-copy">© 2024 SunnyAid. All rights reserved. NDIS Registered Provider #4050072735</p>
+      <nav class="ft-links" aria-label="Footer links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Accessibility</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ═══ CHAT FAB ═══ -->
+  <button class="chat-fab" onclick="toggleChat()" aria-label="Open support chat" aria-expanded="false" id="chatFabBtn">
+    <span aria-hidden="true">💬</span>
+    <span class="notif" id="chatNotif" aria-label="1 unread message">1</span>
+  </button>
+
+  <!-- ═══ CHAT WINDOW ═══ -->
+  <aside class="chat-win" id="chatWin" role="complementary" aria-label="SunnyAid live support chat" aria-hidden="true">
+    <div class="ch-header">
+      <div class="ch-av" aria-hidden="true">🌟</div>
+      <div class="ch-info">
+        <h3>SunnyAid Support</h3>
+        <p><span class="sdot" aria-hidden="true"></span>Online · Replies instantly</p>
+      </div>
+      <button class="ch-close" onclick="toggleChat()" aria-label="Close chat">✕</button>
+    </div>
+
+    <div class="ch-dt" aria-live="polite">
+      <span class="ch-dt-time" id="chatTime">--:-- --</span>
+      <span class="ch-dt-date" id="chatDate">Loading…</span>
+    </div>
+
+    <div class="ch-msgs" id="chatMsgs" role="log" aria-live="polite" aria-relevant="additions">
+      <div class="msg msg-bot">
+        <div class="msg-b">👋 G'day! Welcome to SunnyAid. I'm your NDIS support assistant. How can I help you today?</div>
+        <div class="msg-t" id="initMsgTime"></div>
+      </div>
+    </div>
+
+    <div class="ch-qr" id="chatQR">
+      <button class="qbtn" onclick="sendQ('What services do you offer?')">Our Services</button>
+      <button class="qbtn" onclick="sendQ('How do I apply for NDIS?')">Apply for NDIS</button>
+      <button class="qbtn" onclick="sendQ('What states do you cover?')">Coverage Areas</button>
+      <button class="qbtn" onclick="sendQ('How much does it cost?')">Pricing Info</button>
+    </div>
+
+    <div class="ch-input-row">
+      <label for="chatIn" class="sr-only">Type a message</label>
+      <input class="ch-in" id="chatIn" type="text" placeholder="Type your message…" autocomplete="off"
+        onkeydown="if(event.key==='Enter')sendMsg()">
+      <button class="ch-send" onclick="sendMsg()" aria-label="Send message">➤</button>
+    </div>
+  </aside>
+
+  <!-- ═══ BACK TO TOP ═══ -->
+  <button class="back-top" id="backTop" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+
+  <!-- Script -->
+  <script src="script.js" defer></script>
+</body>
+</html>
